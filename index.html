@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Motor Kontrol</title>
+  <script>
+    var socket = new WebSocket('ws://' + window.location.hostname + ':81/');
+    socket.onmessage = function(event) { 
+      document.getElementById('rpy').innerHTML = event.data; 
+    }
+    function sendCommand(command) { 
+      socket.send(command); 
+    }
+  </script>
+</head>
+<body>
+  <h1>Motor Kontrol</h1>
+  <p id='rpy'>r0 p0 y0</p>
+  <button onclick="sendCommand('ileri')">Ileri</button>
+  <button onclick="sendCommand('geri')">Geri</button>
+  <button onclick="sendCommand('sag')">Sag</button>
+  <button onclick="sendCommand('sol')">Sol</button>
+</body>
+</html>
